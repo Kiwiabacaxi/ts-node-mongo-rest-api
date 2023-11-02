@@ -27,7 +27,7 @@ server.listen(4000, () => {
 });
 
 const MONGO_URL =
-  "mongodb+srv://kiwiabacaxi:kiwiabacaxi@node-crud.n30yoq7.mongodb.net/";
+  "";
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
