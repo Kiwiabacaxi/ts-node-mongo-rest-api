@@ -5,8 +5,8 @@ import cookieParser from "cookie-parser";
 import compression from "compression";
 import cors from "cors";
 
-import mongoose from "mongoose";
 import router from "./router";
+import mongoose from "mongoose";
 
 const app = express();
 

@@ -1,13 +1,12 @@
 import crypto from "crypto";
 
-const SECRET = "REST-API-SECRET";
+const SECRET = "ANTONIO-REST-API";
 
-// criar o randomizer
-
-export const random = () => crypto.randomBytes(128).toString("base64"); // ou deixo hex ?
-export const authentication = (salt: string, password: string) => {
+export const authentication = (salt: string, password: string): string => {
   return crypto
     .createHmac("sha256", [salt, password].join("/"))
     .update(SECRET)
     .digest("hex");
 };
+
+export const random = () => crypto.randomBytes(128).toString("base64"); // trocar par 256 ou hex
