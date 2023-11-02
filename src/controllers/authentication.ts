@@ -8,7 +8,7 @@ export const login = async (req: express.Request, res: express.Response) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.sendStatus(400).json({ message: "Invalid session token" });
+      return res.sendStatus(400).json({ error: "Email or password missing" });
     }
 
     const user = await getUserByEmail(email).select(
@@ -16,13 +16,13 @@ export const login = async (req: express.Request, res: express.Response) => {
     );
 
     if (!user) {
-      return res.sendStatus(400).json({ message: "Invalid session token" });
+      return res.sendStatus(400).json({ error: "User already exists" });
     }
 
     const expectedHash = authentication(user.authentication.salt, password);
 
     if (user.authentication.password != expectedHash) {
-      return res.sendStatus(403).json({ message: "Invalid session token" });
+      return res.sendStatus(403).json({ error: "Invalid password" });
     }
 
     const salt = random();
@@ -50,13 +50,15 @@ export const register = async (req: express.Request, res: express.Response) => {
     const { email, password, username } = req.body;
 
     if (!email || !password || !username) {
-      return res.sendStatus(400).json({ message: "Invalid session token" });
+      return res
+        .sendStatus(400)
+        .json({ error: "Email, password or username missing" });
     }
 
     const existingUser = await getUserByEmail(email);
 
     if (existingUser) {
-      return res.sendStatus(400).json({ message: "Invalid session token" });
+      return res.status(400).json({ error: "User already exists" });
     }
 
     const salt = random();
