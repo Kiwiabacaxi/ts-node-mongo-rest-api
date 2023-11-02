@@ -17,7 +17,7 @@ export const UserModel = mongoose.model("User", UserSchema);
 // Acoes que podem ser feitas no banco de dados
 export const getUser = () => UserModel.find();
 export const getUserByEmail = (email: string) => UserModel.findOne({ email });
-export const getUserByToken = (sessionToken: string) =>
+export const getUserBySessionToken = (sessionToken: string) =>
   UserModel.findOne({ "authentication.sessionToken": sessionToken });
 export const getUserById = (id: string) => UserModel.findById(id);
 export const createUser = (values: Record<string, any>) =>
