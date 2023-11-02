@@ -26,8 +26,7 @@ server.listen(4000, () => {
   console.log(`Server started on http://localhost:4000/`);
 });
 
-const MONGO_URL =
-  "";
+const MONGO_URL = "";
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);
